@@ -1,0 +1,38 @@
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=text] {
+  background-color : rgb(247, 241, 241);
+color : #0c0c0c;
+}
+
+form{
+  border : 1px solid #000;
+  padding : 5px;
+  background-color : rgb(179, 227, 209);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.required-text {
+  display: none; /* Hide the message by default */
+}
+
+input:required:invalid + .required-text {
+  display: block; /* Display the message when the field is empty */
+  color: red;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}
+
