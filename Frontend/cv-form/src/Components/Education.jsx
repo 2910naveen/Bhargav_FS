@@ -14,7 +14,7 @@ const Education = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [date, setDate] = useState(new Date());
+    console.log("education state", state)
 
     // const handleDateChange = (date) => {
     //     setSelectedDate(date.toISOString().slice(0, 10));
@@ -64,11 +64,20 @@ const Education = () => {
     return (
         <div className="container">
             <div >
-                <h1>Step 2</h1><br/>
+                <h1>Step 2</h1><br />
                 <form className="row g-3">
                     <h1>Education</h1>
                     <label htmlFor="highestdegree" >Highest degree</label>
-                    <input className="form-control" value={educationDetails.highestdegree} onChange={(e) => { handleChange(e) }} type="text" name="highestdegree" placeholder="Enter your highest degree" />
+                    <input className="form-control" value={educationDetails.highestdegree} onChange={(e) => { handleChange(e) }} type="text" name="highestdegree" placeholder="Enter your highest degree" list="defaultTels" />
+
+                    <datalist id="defaultTels">
+                        <option value="Btech"></option>
+                        <option value="Mtech"></option>
+                        <option value="Phd"></option>
+                        <option value="MS"></option>
+                    </datalist>
+
+
                     <label htmlFor="fieldOfStudy" >Field Of Study</label>
                     <input className="form-control" value={educationDetails.fieldOfStudy} onChange={(e) => { handleChange(e) }} type="text" name="fieldOfStudy" placeholder="Enter Field of Study" />
                     <label htmlFor="institutionName" >Institution Name</label>
@@ -87,11 +96,9 @@ const Education = () => {
                         backgroundColor: "rgb(247, 241, 241)",
                         color: "#0c0c0c",
                     }} value={educationDetails.graduationDate} onChange={(e) => { handleChange(e) }} type="date" name="graduationDate" placeholder="Enter your Graduation date" />
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-primary" onClick={handleSubmit2}>Previous</button>
-                    </div>
-                    <div className="col-md-2">
-                        <button type="button" className="btn btn-primary" onClick={handleSubmit}>Next</button>
+                    <div>
+                        <button type="button" className="btn btn-warning" onClick={handleSubmit2}>Previous</button>
+                        <button type="button" className="btn btn-danger" onClick={handleSubmit}>Next</button>
                     </div>
                     <div style={{ textAlign: "center", marginTop: "40px" }}>
                         <span class="step finish"></span>

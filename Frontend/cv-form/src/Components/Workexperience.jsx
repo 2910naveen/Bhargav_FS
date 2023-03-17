@@ -88,8 +88,8 @@ const Workexperience = () => {
                     backgroundColor: "rgb(247, 241, 241)",
                     color: "#0c0c0c",
                 }} value={workDetails.endDate} onChange={(e) => { handleChange(e) }} type="date" name="endDate" placeholder="Enter end date (DD/MM/YYYY)" /><br />
-                <button type="button" className="btn btn-primary" onClick={handleSubmit2}>Previous</button>
-                <button type="button" className="btn btn-primary" onClick={handleSubmit}>Next</button>
+                <button type="button" className="btn btn-warning" onClick={handleSubmit2}>Previous</button>
+                <button type="button" className="btn btn-danger" onClick={handleSubmit}>Next</button>
                 <div style={{ textAlign: "center", marginTop: "40px" }}>
                     <span class="step finish"></span>
                     <span class="step finish"></span>

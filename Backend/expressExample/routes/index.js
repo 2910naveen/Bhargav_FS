@@ -56,7 +56,7 @@ res.status(200).send("PDF uploaded successfully");
 
 app.post("/addUser",(req,res)=>{
   var user=req.body;
-  const detail={currentjob:user.currentjob, companyName:user.companyName, startDate:user.startDate, endDate:user.endDate, jobDescription:user.jobDescription, highestdegree:user.highestdegree, fieldOfStudy:user.fieldOfStudy, institutionName:user.institutionName, graduationDate:user.graduationDate, gpa:user.gpa, email:user.email, firstname:user.firstname, lastname:user.lastname, address:user.address, phone:user.phone}
+  const detail={currentjob:user.currentjob, companyName:user.companyName, startDate:user.startDate, endDate:user.endDate, jobDescription:user.jobDescription, highestdegree:user.highestdegree, fieldOfStudy:user.fieldOfStudy, institutionName:user.institutionName, graduationDate:user.graduationDate, gpa:user.gpa, email:user.email, firstname:user.name, lastname:user.lastname, address:user.address, phone:user.phone}
   db.query("Insert into CVUsers SET ?",detail,(err,result)=>{
     if (err) throw err;
     console.log("Added user details and CV");

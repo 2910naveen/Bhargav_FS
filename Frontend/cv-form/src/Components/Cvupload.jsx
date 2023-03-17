@@ -8,8 +8,9 @@ const Cvupload = () => {
   const { state } = useLocation();
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-  const [details, setDetails] = useState({ currentjob: "", companyName: "", startDate: "", endDate: "", jobDescription: "", highestdegree: "", fieldOfStudy: "", institutionName: "", graduationDate: "", gpa: "", email: "", firstname: "", lastname: "", address: "", phone: "" })
+  const [details, setDetails] = useState({ currentjob: "", companyName: "", startDate: "", endDate: "", jobDescription: "", highestdegree: "", fieldOfStudy: "", institutionName: "", graduationDate: "", gpa: "", email: "", firstname: state.name, lastname: "", address: "", phone: "" })
   const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     setFile(file);
@@ -25,7 +26,7 @@ const Cvupload = () => {
   }
 
   const handleSubmit = () => {
-
+    if(submitted){
     axios.post("http://localhost:3002/addUser", details)
       .then((response) => {
         console.log(response);
@@ -36,15 +37,19 @@ const Cvupload = () => {
       });
     //dispatch(addUserAsyncAction(details));
     navigate('/Success');
+    }
   }
   const handleSubmit2 = () => {
     //dispatch(addUserAsyncAction(user));
     //navigate('/Workexperience',{state:details});
   }
   const handleUpload = () => {
+    setSubmitted(true);
     const formData = new FormData();
     formData.append("pdf", file);
-
+    if(submitted){
+      
+    
     axios
       .post("http://localhost:3002/api/upload-pdf", formData)
       .then((response) => {
@@ -54,6 +59,10 @@ const Cvupload = () => {
       .catch((error) => {
         console.log(error);
       });
+    }
+    else{
+      alert("Upload the cv file")
+    }
   };
 
   return (
@@ -64,7 +73,7 @@ const Cvupload = () => {
         <div className="col-md-4">
 
           <label htmlFor="firstname" className="form-label">First Name </label>
-          <input className="form-control" value={details.firstname} onChange={(e) => { handleChange(e) }} type="text" name="firstname" disabled />
+          <input className="form-control" value={state.name} onChange={(e) => { handleChange(e) }} type="text" name="firstname" disabled />
         </div>
         <div className="col-md-4">
           <label htmlFor="lastname" className="form-label" >Last Name {" "}</label>
@@ -157,12 +166,26 @@ const Cvupload = () => {
 
         <h2>Upload CV</h2>
         <div className="col-md-6">
-          <input type="file" onChange={handleFileUpload} />
+          <input type="file" onChange={handleFileUpload} required/>
+          {submitted && <span className="required-text">*This field is required</span>}
         </div>
         <div className="col-md-4">
           <button type="button" className="btn btn-warning" onClick={handleUpload}>Upload</button><br />
         </div>
         {/*<button type="button" className="btn btn-primary" onClick={handleSubmit2}>Previous</button>*/}
+        <div className="col-12">
+          <div className="form-check">
+            <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
+            {submitted && <span className="required-text">*This field is required</span>}
+              <label className="form-check-label" for="invalidCheck">
+                Agree to terms and conditions
+              </label>
+              <div className="invalid-feedback">
+                You must agree before submitting.
+              </div>
+          </div>
+        </div>
+
         <div className="col-12">
           <button type="button" className="btn btn-danger" onClick={handleSubmit}>Submit</button>
         </div>
